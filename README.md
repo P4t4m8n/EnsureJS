@@ -13,4 +13,5 @@ A lightweight TypeScript validation library inspired by [Zod](https://github.com
 Install via npm:
 
 ```bash
-npm install my-validation-lib
+npm install ensurify
+```

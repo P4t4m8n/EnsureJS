@@ -1,7 +1,8 @@
 {
-  "name": "ensurejs",
-  "version": "1.0.0",
+  "name": "ensurify",
+  "version": "0.0.1",
   "description": "",
+  "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {},

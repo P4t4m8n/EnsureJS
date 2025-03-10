@@ -1,0 +1,9 @@
+node_modules/
+tests/
+src/
+jest.config.js
+jest.*
+tsconfig.json
+coverage/
+*.test.ts
+*.spec.ts
