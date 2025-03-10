@@ -10,22 +10,35 @@ export class EnsureObject<T> extends EnsureType<T> {
   }
 
   validate(value: any): ValidationResult<T> {
-    if (typeof value !== "object" || value === null) {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
       return { success: false, error: "Expected an object" };
     }
+
     const result: any = {};
+    const errors: string[] = [];
+
+    // Validate fields in schema
     for (const key in this.schema) {
       const field = this.schema[key];
       const fieldValue = value[key];
       const fieldResult = field.validate(fieldValue);
+
       if (!fieldResult.success) {
-        return {
-          success: false,
-          error: `Field "${key}": ${fieldResult.error}`,
-        };
+        errors.push(`Field "${key}": ${fieldResult.error}`);
+      } else {
+        result[key] = fieldResult.data;
       }
-      result[key] = fieldResult.data;
     }
-    return { success: true, data: result };
+
+    // Handle unexpected fields
+    for (const key in value) {
+      if (!(key in this.schema)) {
+        errors.push(`Field "${key}": Unexpected field not allowed`);
+      }
+    }
+
+    return errors.length > 0
+      ? { success: false, error: errors.join("\n") }
+      : { success: true, data: result };
   }
 }

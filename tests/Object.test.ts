@@ -150,7 +150,7 @@ describe("EnsureObject", () => {
       const emptyValidator = new EnsureObject({});
       expect(emptyValidator.validate({ unexpected: "field" })).toEqual({
         success: false,
-        error: 'Field "unexpected": undefined is not a function',
+        error: 'Field "unexpected": Unexpected field not allowed',
       });
     });
   });

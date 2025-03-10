@@ -58,7 +58,6 @@ export class EnsureString extends EnsureType<string> {
       return { success: false, error: "Expected a string" };
     }
     if (!this.checkMinLength(value)) {
-      console.log(" this.checkMinLength(value):", this.checkMinLength(value));
       return {
         success: false,
         error: `String must be at least ${this.minLength} characters long`,
